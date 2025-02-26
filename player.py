@@ -13,6 +13,7 @@ class Player:
         self.rect = self.sprite.get_rect()
 
     def Update(self): #This method should be called every frame by main.py
+
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             self.rect.x -= self.speed

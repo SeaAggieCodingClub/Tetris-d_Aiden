@@ -3,8 +3,11 @@ import pygame
 # Selfmade Classes #
 
 from player import Player
+from block import Block
 
 ####################
+
+blocks = []
 
 pygame.init()
 
@@ -23,6 +26,8 @@ running = True
 
 player = Player("player.png", (50,50) )
 
+blocks.append( Block( (50, 50), (100,100) ) )
+
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -30,7 +35,15 @@ while running:
 
     screen.fill(BG_COLOR)
     screen.blit(player.sprite, player.rect)
+
+    oldPos = player.rect.center
     player.Update()
+
+    for block in blocks:
+        pygame.draw.rect(screen, BROWN, block.rect)
+
+        if block.rect.colliderect(player.rect):
+            player.rect.center = oldPos
 
     pygame.display.flip()
     clock.tick(FPS)
