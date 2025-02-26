@@ -8,13 +8,14 @@ import main
 
 ####################
 
-
-
-
-
-player = Player("player.png", (50,50) )
+player = Player("player1.png", (50,50) )
 
 Block( (50, 50), (100,100) ) #Create block
+
+Block( (main.WIDTH, main.HEIGHT), (-main.WIDTH, 0) )
+Block( (main.WIDTH, main.HEIGHT), (0, -main.HEIGHT) )
+Block( (main.WIDTH, main.HEIGHT), (main.WIDTH, 0) )
+Block( (main.WIDTH, main.HEIGHT), (0, main.HEIGHT) )
 
 while main.running:
     for event in pygame.event.get():

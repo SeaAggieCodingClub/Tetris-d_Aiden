@@ -1,13 +1,12 @@
 import pygame
 import main
 
-
-
 class Player:
 
     sprite = None
     rect = None
     speed = 1
+    gravSpd = 0
 
     def __init__(self, imageString, playerSize):
         self.sprite = pygame.image.load(imageString)
@@ -26,6 +25,13 @@ class Player:
             self.rect.x -= self.speed
         if keys[pygame.K_RIGHT]:
             self.rect.x += self.speed
+
+        for block in main.blocks:
+            if block.rect.colliderect(self.rect):
+                self.rect.center = oldPos
+
+        oldPos = self.rect.center
+
         if keys[pygame.K_UP]:
             self.rect.y -= self.speed
         if keys[pygame.K_DOWN]:
@@ -34,3 +40,12 @@ class Player:
         for block in main.blocks:
             if block.rect.colliderect(self.rect):
                 self.rect.center = oldPos
+
+        oldPos = self.rect.center
+        
+        self.rect.y += self.gravSpd
+        self.gravSpd += .01
+        for block in main.blocks:
+            if block.rect.colliderect(self.rect):
+                self.rect.center = oldPos
+                self.gravSpd = 0
