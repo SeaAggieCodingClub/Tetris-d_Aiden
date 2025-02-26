@@ -1,4 +1,5 @@
 import pygame
+import main
 
 class Block:
 
@@ -11,4 +12,8 @@ class Block:
         #self.sprite = pygame.transform.scale(self.sprite, size)
         self.rect = pygame.Rect(pos[0], pos[1], size[0], size[1])
         #self.rect = self.sprite.get_rect()
+        main.blocks.append(self)
+
+    def Update(self):
+        pygame.draw.rect(main.screen, main.BROWN, self.rect)
 

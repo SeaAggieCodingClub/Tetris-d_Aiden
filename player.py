@@ -1,4 +1,7 @@
 import pygame
+import main
+
+
 
 class Player:
 
@@ -14,6 +17,10 @@ class Player:
 
     def Update(self): #This method should be called every frame by main.py
 
+        main.screen.blit(self.sprite, self.rect)
+
+        oldPos = self.rect.center
+
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             self.rect.x -= self.speed
@@ -23,3 +30,7 @@ class Player:
             self.rect.y -= self.speed
         if keys[pygame.K_DOWN]:
             self.rect.y += self.speed
+
+        for block in main.blocks:
+            if block.rect.colliderect(self.rect):
+                self.rect.center = oldPos
